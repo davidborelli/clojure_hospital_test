@@ -26,5 +26,14 @@
     (is (cabe-na-fila? {:espera [1 2 3 4]}, :espera))
     (is (cabe-na-fila? {:espera [1 2]}, :espera)))
 
-  (testing "Que ... quando departamento não existe"
+  (testing "Que não cabe quando departamento não existe"
     (is (not (cabe-na-fila? {:espera [1 2 3 4]}, :raio-x)))))
+
+
+
+(deftest chega-em-test
+  (testing "aceita pessoas enquanto cabem pessoas na fila"
+    (is (= {:espera [1 2 3 4 5]}
+           (chega-em {:espera [1 2 3 4]}, :espera, 5)))
+    (is (= {:espera [1 2 5]}
+           (chega-em {:espera [1 2]}, :espera, 5)))))
