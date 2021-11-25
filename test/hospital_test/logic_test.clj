@@ -103,5 +103,5 @@
   ; Lembrando que este teste não garante exatamente isso, garante só o erro do nil
   ;
   (testing "Não pode invocar transferencia sem hospital"
-    (is (thrown? (transfere nil :espera :raio-x))))
+    (is (thrown? clojure.lang.ExceptionInfo (transfere nil :espera :raio-x))))
   )
