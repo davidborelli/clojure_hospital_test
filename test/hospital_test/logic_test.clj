@@ -97,4 +97,11 @@
   (testing "recusa pessoa se não cabe"
     (let [hospital-cheio {:espera (conj ht.model/fila-vazia "5"), :raio-x (conj ht.model/fila-vazia "1" "2" "53" "42" "13")}]
       (is (thrown? clojure.lang.ExceptionInfo
-                   (transfere hospital-cheio :espera :raio-x))))))
+                   (transfere hospital-cheio :espera :raio-x)))))
+
+  ; será que faz sentido garantir que o schema está do outro lado?
+  ; Lembrando que este teste não garante exatamente isso, garante só o erro do nil
+  ;
+  (testing "Não pode invocar transferencia sem hospital"
+    (is (thrown? (transfere nil :espera :raio-x))))
+  )
