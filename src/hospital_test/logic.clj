@@ -85,6 +85,9 @@
 (s/defn transfere :- ht.model/Hospital
   "Transfere o próximo paciente da fila De para a fila Para"
   [hospital :- ht.model/Hospital, de :- s/Keyword, para :- s/Keyword]
+  {
+   :pre [(contains? hospital de), (contains? hospital para)]
+   }
   (let [pessoa (proxima hospital de)]
     (-> hospital
         (atende,,, de)
