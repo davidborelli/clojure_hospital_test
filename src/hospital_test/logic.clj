@@ -82,12 +82,18 @@
       departamento
       peek))
 
+; pode refatorar
+; também podemos testar essa Assertion
+(defn mesmo-tamanho?
+  [hospital-entrada, hospital-saida, de, para]
+  (= (+ (count (get hospital-saida de)) (count (get hospital-saida para)))
+     (+ (count (get hospital-entrada de)) (count (get hospital-entrada para)))))
+
 (s/defn transfere :- ht.model/Hospital
   "Transfere o próximo paciente da fila De para a fila Para"
   [hospital :- ht.model/Hospital, de :- s/Keyword, para :- s/Keyword]
-  {
-   :pre [(contains? hospital de), (contains? hospital para)]
-   }
+  {:pre  [(contains? hospital de), (contains? hospital para)]
+   :post [(mesmo-tamanho? hospital % de para)]}
   (let [pessoa (proxima hospital de)]
     (-> hospital
         (atende,,, de)
